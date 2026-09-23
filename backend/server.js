@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +15,9 @@ const notesFile = path.join(__dirname, "notes.json");
 app.get("/notes", (req, res) => {
     fs.readFile(notesFile, "utf8", (err, data) => {
         if (err) {
-            return res.status(500).json({ error: "Unable to read notes" });
+            return res.status(500).json({
+                error: "Unable to read notes"
+            });
         }
 
         const notes = JSON.parse(data || "[]");
@@ -35,7 +37,9 @@ app.post("/notes", (req, res) => {
 
     fs.readFile(notesFile, "utf8", (err, data) => {
         if (err) {
-            return res.status(500).json({ error: "Unable to read notes" });
+            return res.status(500).json({
+                error: "Unable to read notes"
+            });
         }
 
         const notes = JSON.parse(data || "[]");
@@ -107,5 +111,5 @@ app.delete("/notes/:id", (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
