@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/notes";
+const API_URL = "https://quick-note-app-frkh.onrender.com/notes";
 
 // Load notes when page opens
 document.addEventListener("DOMContentLoaded", loadNotes);
